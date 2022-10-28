@@ -1,0 +1,4 @@
+[custom.all.algebra]
+type   = "local"
+path   = "."
+ipkg   = "algebra.ipkg"

@@ -1,0 +1,12 @@
+package algebra
+
+authors    = "stefan-hoeck"
+brief      = "Lawful algebraic structures"
+version    = 0.0.1
+readme     = "README.md"
+license    = "BSD-3 Clause"
+
+sourcedir  = "src"
+depends    = base    >= 0.5.1
+
+modules = Algebra.Group
