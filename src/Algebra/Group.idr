@@ -363,5 +363,5 @@ namespace Unit
 
 ||| The default group for `Unit` provided by the prelude.
 export
-0 agrp_unit : AbelianGroup Unit MkUnit neg (<+>)
+0 agrp_unit : AbelianGroup Unit MkUnit Unit.neg (<+>)
 agrp_unit = MkAbelianGroup Refl Refl appendLeftNeutral Refl
