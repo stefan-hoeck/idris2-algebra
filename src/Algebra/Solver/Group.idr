@@ -1,10 +1,12 @@
 module Algebra.Solver.Group
 
-import Data.List.Elem
-import Algebra.Group
+import public Data.List.Elem
+import public Algebra.Group
 import Syntax.PreorderReasoning
 
 %default total
+
+infixl 8 .+>, <+., .+.
 
 public export
 data Sng : (a : Type) -> (as : List a) -> Type where
@@ -19,6 +21,34 @@ data Expr : (a : Type) -> (as : List a) -> Type where
   Neutral : Expr a as
   Neg     : Expr a as -> Expr a as
   (<+>)   : Expr a as -> Expr a as -> Expr a as
+
+--------------------------------------------------------------------------------
+--          Syntax
+--------------------------------------------------------------------------------
+
+public export %inline
+(.+>) : (x : a) -> Expr a xs -> {auto p : Elem x xs} -> Expr a xs
+(.+>) x y = Var x p <+> y
+
+public export %inline
+(<+.) : Expr a xs -> (x : a) -> {auto p : Elem x xs} -> Expr a xs
+(<+.) x y = x <+> Var y p
+
+public export %inline
+(.+.) :
+     (x,y : a)
+  -> {auto p : Elem x xs}
+  -> {auto q : Elem y xs}
+  -> Expr a xs
+(.+.) x y = Var x p <+> Var y q
+
+public export %inline
+var : (x : a) -> {auto p : Elem x xs} -> Expr a xs
+var x = Var x p
+
+public export %inline
+neg : (x : a) -> {auto p : Elem x xs} -> Expr a xs
+neg x = Neg $ var x
 
 --------------------------------------------------------------------------------
 --          Evaluation

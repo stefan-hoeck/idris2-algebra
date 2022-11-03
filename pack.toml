@@ -2,3 +2,9 @@
 type   = "local"
 path   = "."
 ipkg   = "algebra.ipkg"
+test   = "test/test.ipkg"
+
+[custom.all.algebra-test]
+type   = "local"
+path   = "test"
+ipkg   = "test.ipkg"
