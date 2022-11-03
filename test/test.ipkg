@@ -1,0 +1,13 @@
+package algebra-test
+
+authors    = "stefan-hoeck"
+brief      = "Test suite for algebra package"
+version    = 0.0.1
+readme     = "README.md"
+license    = "BSD-3 Clause"
+
+sourcedir  = "src"
+depends    = algebra
+
+main = Main
+executable = algebra-test
