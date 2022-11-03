@@ -1,4 +1,4 @@
-module C3
+module D3
 
 import public Algebra.Group
 
@@ -6,10 +6,10 @@ import public Algebra.Group
 
 ||| The smallest non-abelian group
 public export
-data C3 = E | A | B | AB | BA | ABA
+data D3 = E | A | B | AB | BA | ABA
 
 public export
-(<+>) : C3 -> C3 -> C3
+(<+>) : D3 -> D3 -> D3
 E   <+> y   = y
 x   <+> E   = x
 A   <+> A   = E
@@ -39,7 +39,7 @@ ABA <+> BA  = B
 ABA <+> ABA = E
 
 public export
-neg : C3 -> C3
+neg : D3 -> D3
 neg E   = E
 neg A   = A
 neg B   = B
@@ -51,7 +51,7 @@ neg ABA = ABA
 --          Proofs
 --------------------------------------------------------------------------------
 
-assoc : (x,y,z : C3) -> x <+> (y <+> z) === (x <+> y) <+> z
+assoc : (x,y,z : D3) -> x <+> (y <+> z) === (x <+> y) <+> z
 assoc E y z       = Refl
 assoc A E z       = Refl
 assoc B E z       = Refl
@@ -209,10 +209,10 @@ assoc ABA ABA AB  = Refl
 assoc ABA ABA BA  = Refl
 assoc ABA ABA ABA = Refl
 
-lne : (c : C3) -> E <+> c === c
+lne : (c : D3) -> E <+> c === c
 lne c = Refl
 
-rne : (c : C3) -> c <+> E === c
+rne : (c : D3) -> c <+> E === c
 rne E   = Refl
 rne A   = Refl
 rne B   = Refl
@@ -220,7 +220,7 @@ rne AB  = Refl
 rne BA  = Refl
 rne ABA = Refl
 
-linv : (c : C3) -> neg c <+> c === E
+linv : (c : D3) -> neg c <+> c === E
 linv E   = Refl
 linv A   = Refl
 linv B   = Refl
@@ -228,7 +228,7 @@ linv AB  = Refl
 linv BA  = Refl
 linv ABA = Refl
 
-rinv : (c : C3) -> c <+> neg c === E
+rinv : (c : D3) -> c <+> neg c === E
 rinv E   = Refl
 rinv A   = Refl
 rinv B   = Refl
@@ -237,5 +237,5 @@ rinv BA  = Refl
 rinv ABA = Refl
 
 export
-grp_c3 : Group C3 E C3.neg (<+>)
-grp_c3 = MkGroup (assoc _ _ _) (lne _) (rne _) (linv _) (rinv _)
+grp_d3 : Group D3 E D3.neg (<+>)
+grp_d3 = MkGroup (assoc _ _ _) (lne _) (rne _) (linv _) (rinv _)
