@@ -51,7 +51,7 @@ normalize (x <+> y) = normalize x ++ normalize y
   -> esum z p (xs ++ ys) === esum z p xs `p` esum z p ys
 psum m []        ys = sym m.leftNeutral
 psum m (x :: xs) ys = Calc $
-  |~ x `p` esum z p (xs ++ ys) 
+  |~ x `p` esum z p (xs ++ ys)
   ~~ x `p` (esum z p xs `p` esum z p ys) ... cong (p x) (psum m xs ys)
   ~~ (x `p` esum z p xs) `p` esum z p ys ... m.associative
 

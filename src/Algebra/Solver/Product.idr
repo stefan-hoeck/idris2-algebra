@@ -243,7 +243,7 @@ pcompProd (_ :: _)  []        Refl impossible
 --------------------------------------------------------------------------------
 --          Ring Proofs
 --------------------------------------------------------------------------------
--- 
+--
 -- ||| Evaluating a negated term is equivalent to negate the
 -- ||| result of evaluating the term.
 -- export

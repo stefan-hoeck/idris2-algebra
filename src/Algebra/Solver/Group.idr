@@ -55,7 +55,7 @@ neg x = Neg $ var x
 --------------------------------------------------------------------------------
 
 public export
-eval : 
+eval :
      (z   : a)
   -> (neg : a -> a)
   -> (app : a -> a -> a)
@@ -178,7 +178,7 @@ pnegate' g vs []        = Calc $
   ~~ p z     (elist z i p vs) ... cong (`p` elist z i p vs) (inverseZero g)
   ~~ elist z i p vs           ... g.leftNeutral
 pnegate' g vs (w :: ws) = Calc $
-  |~ i (esng i w `p` elist z i p ws) `p` elist z i p vs 
+  |~ i (esng i w `p` elist z i p ws) `p` elist z i p vs
   ~~ (i (elist z i p ws) `p` (i (esng i w)) `p` elist z i p vs)
      ... cong ( `p` elist z i p vs) (invertProduct g)
   ~~ i (elist z i p ws) `p` (i (esng i w) `p` elist z i p vs)
@@ -206,7 +206,7 @@ pnegate g ws = Calc $
   -> elist z i p vs `p` elist z i p ws === elist z i p (vs ++ ws)
 pelist g []        ws = g.leftNeutral
 pelist g (v :: vs) ws = Calc $
-  |~ (esng i v `p` elist z i p vs) `p` elist z i p ws 
+  |~ (esng i v `p` elist z i p vs) `p` elist z i p ws
   ~~ esng i v `p` (elist z i p vs `p` elist z i p ws)
      ..< g.associative
   ~~ esng i v `p` elist z i p (vs ++ ws)
@@ -224,8 +224,8 @@ pflatten g (Neg x)   = Calc $
   ~~ i (elist z i p (flatten i x))           ... cong i (pflatten g x)
   ~~ elist z i p (negate i [] (flatten i x)) ... pnegate g (flatten i x)
 pflatten g (x <+> y) = Calc $
-  |~ eval z i p x `p` eval z i p y 
-  ~~ elist z i p (flatten i x) `p` eval z i p y 
+  |~ eval z i p x `p` eval z i p y
+  ~~ elist z i p (flatten i x) `p` eval z i p y
      ... cong (`p` eval z i p y) (pflatten g x)
   ~~ elist z i p (flatten i x) `p` elist z i p (flatten i y)
      ... cong (elist z i p (flatten i x) `p`) (pflatten g y)
@@ -241,7 +241,7 @@ pmerge g isZ []        = Refl
 
 pmerge g isZ (SLit lit :: xs) with (isZ lit)
   pmerge g isZ (SLit lit :: xs) | Just prf  = Calc $
-    |~ lit `p` elist z i p xs 
+    |~ lit `p` elist z i p xs
     ~~ z `p` elist z i p xs             ... cong (`p` elist z i p xs) prf
     ~~ elist z i p xs                   ... g.leftNeutral
     ~~ elist z i p (merge z i p isZ xs) ... pmerge g isZ xs
@@ -255,7 +255,7 @@ pmerge g isZ (SLit lit :: xs) with (isZ lit)
          ... cong (\x => lit `p` elist z i p x) mrg
     pmerge g isZ (SLit lit :: xs) | Nothing | (SLit x   :: ys) with (isZ (lit `p` x))
       pmerge g isZ (SLit lit :: xs) | Nothing | (SLit x   :: ys) | Just prf = Calc $
-        |~ lit `p` elist z i p xs 
+        |~ lit `p` elist z i p xs
         ~~ lit `p` elist z i p (merge z i p isZ xs)
            ... cong (lit `p`) (pmerge g isZ xs)
         ~~ lit `p` elist z i p (SLit x :: ys)
@@ -266,7 +266,7 @@ pmerge g isZ (SLit lit :: xs) with (isZ lit)
            ... cong (`p` elist z i p ys) prf
         ~~ elist z i p ys ... g.leftNeutral
       pmerge g isZ (SLit lit :: xs) | Nothing | (SLit x   :: ys) | Nothing  = Calc $
-        |~ lit `p` elist z i p xs 
+        |~ lit `p` elist z i p xs
         ~~ lit `p` elist z i p (merge z i p isZ xs)
            ... cong (lit `p`) (pmerge g isZ xs)
         ~~ lit `p` elist z i p (SLit x :: ys)
@@ -370,7 +370,7 @@ pmerge g isZ (SNeg x y :: xs) with (merge z i p isZ xs) proof mrg
   -> (e : Expr a as)
   -> eval z i p e === elist z i p (normalize z i p isZ e)
 pnormalize g isZ e = Calc $
-  |~ eval z i p e 
+  |~ eval z i p e
   ~~ elist z i p (flatten i e)                   ... pflatten g e
   ~~ elist z i p (merge z i p isZ $ flatten i e) ... pmerge g isZ (flatten i e)
 
