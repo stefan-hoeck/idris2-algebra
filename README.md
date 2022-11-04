@@ -1,4 +1,4 @@
-# idris2-algebra Lawful algebraic structures in Idris2
+# idris2-algebra: Lawful algebraic structures in Idris2
 
 This library provides laws and proofs for common algebraic structures
 such as groups and rings. These laws are encoded as record types
@@ -13,11 +13,15 @@ record Monoid (a : Type) (z : a) (p : Op2 a) where
   leftNeutral  : LeftNeutral z p
 ```
 
-Here `Op2 a` is an alias for a binary function on `a`: `a -> a -> a`,
+Here `Op2 a` is an alias for a binary function on `a`,
 and the given field types are aliases for the corresponding algebraic
 laws. For instance:
 
 ```idris
+public export
+0 Op2 : Type -> Type
+Op2 a = a -> a -> a
+
 public export
 0 LeftNeutral : (z : a) -> Op2 a -> Type
 LeftNeutral z p = {u : a} -> z `p` u === u
@@ -40,7 +44,7 @@ interface Semigroup a => SemigroupV a where
 Unfortunately, this does not go well for more complex cases.
 In the following version of `MonoidV`, Idris will no longer be able
 to verify that the `Monoid` and `SemigroupV` our interface inherits
-from, are using the same version of `(<+>)` (because Idris - unlike Haskell -
+from are using the same version of `(<+>)` (because Idris - unlike Haskell -
 has no such thing as typeclass coherence):
 
 ```idris
@@ -56,8 +60,11 @@ interface SemigroupV (0 a : Type) (0 sem : Semigroup a) where
 
 This resolves the coherence issue described above, but it is still
 cumbersome to talk about towers of algebraic structures. In addition,
-with this approach we haven mostly given up type inference, and will often
+with this approach we have mostly given up type inference, and hence
+interface resolution, and will often
 have to specify explicitly the interface implementation to use.
+But in that case, we can give up on interfaces altogether and just
+use plain indexed Idris types as explicit arguments.
 
-But in that case, we can give up interfaces altogether and just
-use plain indexed Idris records.
+For a lengthier discussion about the issues described here,
+see [Idris2 issue #72](https://github.com/idris-lang/Idris2/issues/72).
