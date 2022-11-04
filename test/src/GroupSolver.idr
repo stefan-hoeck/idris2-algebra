@@ -12,9 +12,9 @@ IsE _ = Nothing
 0 solveD3 :
      (cs : List D3)
   -> (e1,e2 : Expr D3 cs)
-  -> {auto prf : normalize E D3.neg (<+>) IsE e1 === normalize E D3.neg (<+>) IsE e2}
-  -> eval E D3.neg (<+>) e1 === eval E D3.neg (<+>) e2
-solveD3 _ e1 e2 = solve grp_d3 IsE e1 e2
+  -> {auto prf : normalize GrpD3 IsE e1 === normalize GrpD3 IsE e2}
+  -> eval GrpD3 e1 === eval GrpD3 e2
+solveD3 _ e1 e2 = solve GrpD3 IsE e1 e2
 
 --------------------------------------------------------------------------------
 --          Examples

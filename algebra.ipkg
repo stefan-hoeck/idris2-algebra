@@ -13,5 +13,6 @@ modules = Algebra.Group
 
         , Algebra.Solver.Group
         , Algebra.Solver.Monoid
-        , Algebra.Solver.Semigroup
+        , Algebra.Solver.Ops
         , Algebra.Solver.Product
+        , Algebra.Solver.Semigroup
