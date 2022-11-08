@@ -237,5 +237,5 @@ rinv BA  = Refl
 rinv ABA = Refl
 
 export
-grp_d3 : Group D3 E D3.neg (<+>)
-grp_d3 = MkGroup (assoc _ _ _) (lne _) (rne _) (linv _) (rinv _)
+GrpD3 : Group D3 E D3.neg (<+>)
+GrpD3 = MkGroup (assoc _ _ _) (lne _) (rne _) (linv _) (rinv _)
