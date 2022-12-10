@@ -1,6 +1,7 @@
 module Algebra.Solver.Product
 
 import Algebra.Group
+import Algebra.Ring
 import public Data.List.Elem
 import Syntax.PreorderReasoning
 
@@ -243,6 +244,25 @@ pcompProd (_ :: _)  []        Refl impossible
 --------------------------------------------------------------------------------
 --          Ring Proofs
 --------------------------------------------------------------------------------
+
+||| Proof that evaluation of a multiplication of products
+||| is the same as multiplying the results of evaluating each
+||| of them.
+export
+0 pmult :
+     Semiring
+        => (p,q : Prod a as)
+        -> eprod (mult p q) === eprod p * eprod q
+pmult []        []        = sym multOneLeftNeutral
+pmult {as = h :: t} (x :: xs) (y :: ys) = Calc $
+  |~ pow h (x + y) * eprod (mult xs ys)
+  ~~ (pow h x * pow h y) * eprod (mult xs ys)
+     ... cong (* eprod (mult xs ys)) (ppow x y h)
+  ~~ (pow h x * pow h y) * (eprod xs * eprod ys)
+     ... cong ((pow h x * pow h y) *) (pmult xs ys)
+  ~~ (pow h x * eprod xs) * (pow h y * eprod ys)
+     ... Util.m1324
+
 --
 -- ||| Evaluating a negated term is equivalent to negate the
 -- ||| result of evaluating the term.

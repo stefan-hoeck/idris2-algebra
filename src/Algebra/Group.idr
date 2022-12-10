@@ -3,6 +3,7 @@ module Algebra.Group
 import Data.List
 import Data.List1
 import Data.List1.Properties
+import Data.Nat
 import Syntax.PreorderReasoning
 
 %default total
@@ -30,7 +31,12 @@ public export
 Op2 a = a -> a -> a
 
 ||| Proposition that the given binary operation is associative.
-public export
+public export %tcinline
+0 Assoc : Op2 a -> Type
+Assoc p = (u,v,w : a) -> u `p` (v `p` w) === (u `p` v) `p` w
+
+||| Proposition that the given binary operation is associative.
+public export %tcinline
 0 Associative : Op2 a -> Type
 Associative p = {u,v,w : a} -> u `p` (v `p` w) === (u `p` v) `p` w
 
@@ -150,6 +156,18 @@ record CommutativeMonoid (a : Type) (z : a) (p : Op2 a) where
   associative : Associative p
   commutative : Commutative p
   leftNeutral : LeftNeutral z p
+
+public export
+mkCommutativeMonoid :
+     {a : Type}
+  -> {z : a}
+  -> {p : Op2 a}
+  -> ((u,v,w : a) -> u `p` (v `p` w) === (u `p` v) `p` w)
+  -> ((u,v   : a) -> u `p` v === v `p` u)
+  -> ((u     : a) -> z `p` u === u)
+  -> CommutativeMonoid a z p
+mkCommutativeMonoid assoc comm ln =
+  MkCommutativeMonoid (assoc _ _ _) (comm _ _) (ln _)
 
 namespace CommutativeMonoid
 
@@ -352,6 +370,20 @@ sgrp_list1 = MkSemigroup (appendAssociative _ _ _)
 export
 0 mon_list : Monoid (List a) [] (++)
 mon_list = MkMonoid (appendAssociative _ _ _) (appendNilRightNeutral _) Refl
+
+--------------------------------------------------------------------------------
+--          Nat
+--------------------------------------------------------------------------------
+
+export
+0 cmon_nat_plus : CommutativeMonoid Nat Z (+)
+cmon_nat_plus =
+  mkCommutativeMonoid plusAssociative plusCommutative plusZeroLeftNeutral
+
+export
+0 cmon_nat_mult : CommutativeMonoid Nat 1 (*)
+cmon_nat_mult =
+  mkCommutativeMonoid multAssociative multCommutative multOneLeftNeutral
 
 --------------------------------------------------------------------------------
 --          Maybe
