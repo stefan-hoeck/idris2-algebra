@@ -250,18 +250,18 @@ pcompProd (_ :: _)  []        Refl impossible
 ||| of them.
 export
 0 pmult :
-     Semiring
-        => (p,q : Prod a as)
-        -> eprod (mult p q) === eprod p * eprod q
-pmult []        []        = sym multOneLeftNeutral
-pmult {as = h :: t} (x :: xs) (y :: ys) = Calc $
-  |~ pow h (x + y) * eprod (mult xs ys)
-  ~~ (pow h x * pow h y) * eprod (mult xs ys)
-     ... cong (* eprod (mult xs ys)) (ppow x y h)
-  ~~ (pow h x * pow h y) * (eprod xs * eprod ys)
-     ... cong ((pow h x * pow h y) *) (pmult xs ys)
-  ~~ (pow h x * eprod xs) * (pow h y * eprod ys)
-     ... Util.m1324
+     Rig a z o p m
+  -> (x,y : Prod a as)
+  -> eprod m o (mult x y) === eprod m o x `m` eprod m o y
+pmult r               []        []        = sym r.mult.leftNeutral
+pmult r {as = h :: t} (x :: xs) (y :: ys) = Calc $
+  |~ times m o (x + y) h `m` eprod m o (mult xs ys)
+  ~~ (times m o x h `m` times m o y h) `m` eprod m o (mult xs ys)
+     ..< cong (`m` eprod m o (mult xs ys)) (ptimes r.mult x y h)
+  ~~ (times m o x h `m` times m o y h) `m` (eprod m o xs `m` eprod m o ys)
+     ... cong ((times m o x h `m` times m o y h) `m`) (pmult r xs ys)
+  ~~ (times m o x h `m` eprod m o xs) `m` (times m o y h `m` eprod m o ys)
+    ... lemma1324 r.mult.csgrp
 
 --
 -- ||| Evaluating a negated term is equivalent to negate the

@@ -68,8 +68,8 @@ rightDistributive r =
     ~~ y `m` x `p` v `m` x     ... cong (y `m` x `p`) r.mult.commutative
 
 export
-0 rig_nat : Rig Nat 0 1 (+) (*)
-rig_nat =
+0 NatRig : Rig Nat 0 1 (+) (*)
+NatRig =
   MkRig cmon_nat_plus cmon_nat_mult (multDistributesOverPlusRight  _ _ _) Refl
 
 --------------------------------------------------------------------------------
