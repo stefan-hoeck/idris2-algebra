@@ -1,6 +1,7 @@
 module Algebra.Solver.Product
 
 import Algebra.Group
+import Algebra.Ring
 import public Data.List.Elem
 import Syntax.PreorderReasoning
 
@@ -243,13 +244,21 @@ pcompProd (_ :: _)  []        Refl impossible
 --------------------------------------------------------------------------------
 --          Ring Proofs
 --------------------------------------------------------------------------------
---
--- ||| Evaluating a negated term is equivalent to negate the
--- ||| result of evaluating the term.
--- export
--- 0 pnegTerm :
---      {neg : _}
---   -> Ring a neg
---   => (x : Term a as)
---   -> eterm (negTerm x) === negate (eterm x)
--- pnegTerm (T f p) = multNegLeft
+
+||| Proof that evaluation of a multiplication of products
+||| is the same as multiplying the results of evaluating each
+||| of them.
+export
+0 pmult :
+     Rig a z o p m
+  -> (x,y : Prod a as)
+  -> eprod m o (mult x y) === eprod m o x `m` eprod m o y
+pmult r               []        []        = sym r.mult.leftNeutral
+pmult r {as = h :: t} (x :: xs) (y :: ys) = Calc $
+  |~ times m o (x + y) h `m` eprod m o (mult xs ys)
+  ~~ (times m o x h `m` times m o y h) `m` eprod m o (mult xs ys)
+     ..< cong (`m` eprod m o (mult xs ys)) (ptimes r.mult x y h)
+  ~~ (times m o x h `m` times m o y h) `m` (eprod m o xs `m` eprod m o ys)
+     ... cong ((times m o x h `m` times m o y h) `m`) (pmult r xs ys)
+  ~~ (times m o x h `m` eprod m o xs) `m` (times m o y h `m` eprod m o ys)
+    ... lemma1324 r.mult.csgrp

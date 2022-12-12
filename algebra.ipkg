@@ -10,9 +10,13 @@ sourcedir  = "src"
 depends    = base    >= 0.6.0
 
 modules = Algebra.Group
+        , Algebra.Ring
 
         , Algebra.Solver.Group
         , Algebra.Solver.Monoid
         , Algebra.Solver.Ops
         , Algebra.Solver.Product
+        , Algebra.Solver.Ring
         , Algebra.Solver.Semigroup
+        , Algebra.Solver.Semiring
+        , Algebra.Solver.Sum
