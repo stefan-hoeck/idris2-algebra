@@ -199,7 +199,7 @@ normalize g isZ e = merge g isZ (flatten i e)
   -> i (eterm i s) === eterm i (negSng i s)
 pnegSng g (TLit lit) = Refl
 pnegSng g (TVar x y) = Refl
-pnegSng g (TNeg x y) = inverseInverse g
+pnegSng g (TNeg x y) = inverseInvolutory g
 
 0 pnegate' :
      (g  : Group a z i p)

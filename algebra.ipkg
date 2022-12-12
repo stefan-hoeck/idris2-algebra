@@ -16,5 +16,7 @@ modules = Algebra.Group
         , Algebra.Solver.Monoid
         , Algebra.Solver.Ops
         , Algebra.Solver.Product
+        , Algebra.Solver.Ring
         , Algebra.Solver.Semigroup
         , Algebra.Solver.Semiring
+        , Algebra.Solver.Sum

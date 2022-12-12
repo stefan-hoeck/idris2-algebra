@@ -262,14 +262,3 @@ pmult r {as = h :: t} (x :: xs) (y :: ys) = Calc $
      ... cong ((times m o x h `m` times m o y h) `m`) (pmult r xs ys)
   ~~ (times m o x h `m` eprod m o xs) `m` (times m o y h `m` eprod m o ys)
     ... lemma1324 r.mult.csgrp
-
---
--- ||| Evaluating a negated term is equivalent to negate the
--- ||| result of evaluating the term.
--- export
--- 0 pnegTerm :
---      {neg : _}
---   -> Ring a neg
---   => (x : Term a as)
---   -> eterm (negTerm x) === negate (eterm x)
--- pnegTerm (T f p) = multNegLeft

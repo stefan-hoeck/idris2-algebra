@@ -12,7 +12,7 @@ import Syntax.PreorderReasoning
 --          "Operators"
 --------------------------------------------------------------------------------
 
-infixl 8 `p`
+infixl 8 `p`,`sub`
 
 infixl 9 `m`
 
@@ -288,8 +288,8 @@ inverseZero g = sym $ solveInverseRight g $ g.rightNeutral
 
 ||| In a group, inverting an value twice yields the original value.
 export
-0 inverseInverse : Group a z i p -> {u : a} -> i (i u) === u
-inverseInverse g = sym $ solveInverseRight g g.rightInverse
+0 inverseInvolutory : Group a z i p -> {u : a} -> i (i u) === u
+inverseInvolutory g = sym $ solveInverseRight g g.rightInverse
 
 namespace Group
 

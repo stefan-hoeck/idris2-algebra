@@ -109,7 +109,7 @@ parameters {0 a : Type}
            ~~ (f * epr x + g * epr x) + (esum xs + esum ys)
              ... lemma1324 r.plus.csgrp
            ~~ (f + g) * epr x + (esum xs + esum ys)
-             ..< cong ( + (esum xs + esum ys)) (rightDistributive r)
+             ..< cong ( + (esum xs + esum ys)) r.rightDistributive
            ~~ (f + g) * epr x + esum (add xs ys)
              ... cong ((f + g) * epr x +) (padd xs ys)
 
@@ -127,7 +127,7 @@ parameters {0 a : Type}
     -> (q : Prod a as)
     -> (s : Sum a as)
     -> esum (mult1 (T v q) s) === (v * epr q) * esum s
-  pmult1 v q []            = sym (multZeroRightAbsorbs r)
+  pmult1 v q []            = sym r.multZeroRightAbsorbs
   pmult1 v q (T f x :: xs) = Calc $
     |~ (v * f) * epr (mult q x) + esum (mult1 (T v q) xs)
     ~~ (v * f) * (epr q * epr x) + esum (mult1 (T v q) xs)
@@ -146,7 +146,7 @@ parameters {0 a : Type}
   pmult (T f x :: xs) y = Calc $
     |~ (f * epr x + esum xs) * esum y
     ~~ (f * epr x) * esum y + esum xs * esum y
-      ... rightDistributive r
+      ... r.rightDistributive
     ~~ (f * epr x) * esum y + esum (mult xs y)
       ... cong ((f * epr x) * esum y +) (pmult xs y)
     ~~ esum (mult1 (T f x) y) + esum (mult xs y)
