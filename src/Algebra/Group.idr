@@ -491,3 +491,86 @@ namespace Unit
 export
 0 agrp_unit : AbelianGroup Unit MkUnit Unit.neg (<+>)
 agrp_unit = MkAbelianGroup Refl Refl appendLeftNeutral Refl
+
+--------------------------------------------------------------------------------
+--          Primitives
+--------------------------------------------------------------------------------
+
+unsafeRefl : a === b
+unsafeRefl = believe_me (Refl {x = a})
+
+export
+0 mon_string : Monoid String "" Prelude.String.(++)
+mon_string = MkMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_bits8 : AbelianGroup Bits8 0 Prelude.negate Prelude.(+)
+plus_bits8 = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_bits8 : CommutativeMonoid Bits8 1 Prelude.(*)
+mult_bits8 = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_bits16 : AbelianGroup Bits16 0 Prelude.negate Prelude.(+)
+plus_bits16 = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_bits16 : CommutativeMonoid Bits16 1 Prelude.(*)
+mult_bits16 = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_bits32 : AbelianGroup Bits32 0 Prelude.negate Prelude.(+)
+plus_bits32 = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_bits32 : CommutativeMonoid Bits32 1 Prelude.(*)
+mult_bits32 = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_bits64 : AbelianGroup Bits64 0 Prelude.negate Prelude.(+)
+plus_bits64 = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_bits64 : CommutativeMonoid Bits64 1 Prelude.(*)
+mult_bits64 = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_int8 : AbelianGroup Int8 0 Prelude.negate Prelude.(+)
+plus_int8 = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_int8 : CommutativeMonoid Int8 1 Prelude.(*)
+mult_int8 = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_int16 : AbelianGroup Int16 0 Prelude.negate Prelude.(+)
+plus_int16 = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_int16 : CommutativeMonoid Int16 1 Prelude.(*)
+mult_int16 = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_int32 : AbelianGroup Int32 0 Prelude.negate Prelude.(+)
+plus_int32 = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_int32 : CommutativeMonoid Int32 1 Prelude.(*)
+mult_int32 = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_int64 : AbelianGroup Int64 0 Prelude.negate Prelude.(+)
+plus_int64 = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_int64 : CommutativeMonoid Int64 1 Prelude.(*)
+mult_int64 = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 plus_integer : AbelianGroup Integer 0 Prelude.negate Prelude.(+)
+plus_integer = MkAbelianGroup unsafeRefl unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 mult_integer : CommutativeMonoid Integer 1 Prelude.(*)
+mult_integer = MkCommutativeMonoid unsafeRefl unsafeRefl unsafeRefl

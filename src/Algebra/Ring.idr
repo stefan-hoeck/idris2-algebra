@@ -224,3 +224,46 @@ namespace Ring
     ~~ z `sub` (x `m` (z `sub` y)) ... r.multNegLeft
     ~~ z `sub` (z `sub` (x `m` y)) ... cong (z `sub`) r.multNegRight
     ~~ x `m` y                     ... inverseInvolutory r.plus.grp
+
+--------------------------------------------------------------------------------
+--          Primitives
+--------------------------------------------------------------------------------
+
+unsafeRefl : a === b
+unsafeRefl = believe_me (Refl {x = a})
+
+export
+0 ring_bits8 : Ring Bits8 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_bits8 = MkRing plus_bits8.cmon mult_bits8 unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 ring_bits16 : Ring Bits16 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_bits16 = MkRing plus_bits16.cmon mult_bits16 unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 ring_bits32 : Ring Bits32 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_bits32 = MkRing plus_bits32.cmon mult_bits32 unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 ring_bits64 : Ring Bits64 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_bits64 = MkRing plus_bits64.cmon mult_bits64 unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 ring_int8 : Ring Int8 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_int8 = MkRing plus_int8.cmon mult_int8 unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 ring_int16 : Ring Int16 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_int16 = MkRing plus_int16.cmon mult_int16 unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 ring_int32 : Ring Int32 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_int32 = MkRing plus_int32.cmon mult_int32 unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 ring_int64 : Ring Int64 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_int64 = MkRing plus_int64.cmon mult_int64 unsafeRefl unsafeRefl unsafeRefl
+
+export
+0 ring_integer : Ring Integer 0 1 Prelude.(+) Prelude.(*) Prelude.(-)
+ring_integer = MkRing plus_integer.cmon mult_integer unsafeRefl unsafeRefl unsafeRefl
