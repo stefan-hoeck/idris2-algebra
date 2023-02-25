@@ -20,3 +20,19 @@ modules = Algebra.Group
         , Algebra.Solver.Semigroup
         , Algebra.Solver.Semiring
         , Algebra.Solver.Sum
+
+        , Control.Relation.ReflexiveClosure
+        , Control.Relation.Trichotomy
+
+        , Data.Maybe0
+        , Data.Either0
+        , Data.Pair0
+        , Data.Prim.Bits8
+        , Data.Prim.Bits16
+        , Data.Prim.Bits32
+        , Data.Prim.Bits64
+        , Data.Prim.Int8
+        , Data.Prim.Int16
+        , Data.Prim.Int32
+        , Data.Prim.Int64
+        , Data.Prim.Integer
