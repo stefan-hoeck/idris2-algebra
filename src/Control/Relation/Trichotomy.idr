@@ -71,10 +71,12 @@ swap (GT l e g) = LT g (\x => e $ sym x) l
 
 public export
 interface Trichotomous (0 a : Type) (0 rel : a -> a -> Type) | rel where
+  constructor MkTrichotomous
   trichotomy : (m,n : a) -> Trichotomy rel m n
 
 public export
 interface Transitive a rel => Trichotomous a rel => Strict a rel where
+  constructor MkStrict
 
 public export
 Trichotomous a rel => Antisymmetric a rel where
@@ -82,6 +84,13 @@ Trichotomous a rel => Antisymmetric a rel where
     LT _ _ g   => void $ g p
     EQ f _ _   => void $ f q
     GT f _ _   => void $ f q
+
+public export
+0 irreflexive : {x : _} -> Trichotomous a rel => rel x x -> Void
+irreflexive lt = case trichotomy x x of
+  LT _ g _   => g Refl
+  EQ f _ _   => f lt
+  GT f _ _   => f lt
 
 public export
 Trichotomous a rel => Antisymmetric a (ReflexiveClosure rel) where

@@ -4,6 +4,8 @@ import Algebra.Group
 import Data.Nat
 import Syntax.PreorderReasoning
 
+%default total
+
 ||| Proposition that multiplication distributes over addition
 public export
 0 LeftDistributive : (p,m : Op2 a) -> Type
