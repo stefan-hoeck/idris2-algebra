@@ -86,6 +86,13 @@ Trichotomous a rel => Antisymmetric a rel where
     GT f _ _   => void $ f q
 
 public export
+0 irreflexive : {x : _} -> Trichotomous a rel => rel x x -> Void
+irreflexive lt = case trichotomy x x of
+  LT _ g _   => g Refl
+  EQ f _ _   => f lt
+  GT f _ _   => f lt
+
+public export
 Trichotomous a rel => Antisymmetric a (ReflexiveClosure rel) where
   antisymmetric _        Refl   = Refl
   antisymmetric Refl     _      = Refl

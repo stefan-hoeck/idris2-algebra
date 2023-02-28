@@ -111,12 +111,18 @@ parameters {0 a : Type}
   plusNonPosLeft (Rel l) = Rel $ plusNegLeft l
   plusNonPosLeft Refl    = fromEq r.ring.plus.leftNeutral
 
-  -- ||| We can solve (in)equalities, where the same value has
-  -- ||| been added on both sides.
-  -- export
-  -- 0 solvePlusRight : {u,v,w : a} -> lt (p u w) (p v w) -> lt u v
-  -- solvePlusRight {u} {v} {w} prf = CalcSmart {leq = lt} $
-  --   |~ u
-  --   ~~ p (p u w) (sub z w) ... solve r.ring {as = [u,w]} (Var u) ((u .+. w) + (Var z - Var w))
-  --   <~ p (p v w) (sub z w) ..> plusRight prf
-  --   ~~ v                   ... ?prf2
+  ||| We can solve (in)equalities, where the same value has
+  ||| been added on both sides.
+  export
+  0 solvePlusRight : {u,v,w : a} -> lt (p u w) (p v w) -> lt u v
+  solvePlusRight {u} {v} {w} prf = CalcSmart {leq = lt} $
+    |~ u
+    ~~ p u z               ..< r.ring.plus.rightNeutral
+    ~~ p u (sub w w)       ..< cong (p u) r.ring.minusSelf
+    ~~ p u (p w (sub z w)) ... cong (p u) r.ring.minusIsPlusRight
+    ~~ p (p u w) (sub z w) ... r.ring.plus.associative
+    <~ p (p v w) (sub z w) ..> plusRight prf
+    ~~ p v (p w (sub z w)) ..< r.ring.plus.associative
+    ~~ p v (sub w w)       ..< cong (p v) r.ring.minusIsPlusRight
+    ~~ p v z               ... cong (p v) r.ring.minusSelf
+    ~~ v                   ... r.ring.plus.rightNeutral
