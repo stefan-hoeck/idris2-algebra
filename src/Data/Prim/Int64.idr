@@ -130,7 +130,8 @@ GTE_MinInt64 m = case comp MinInt64 m of
 
 ||| Not value of type `Int64` is less than zero.
 export
-0 Not_LT_MinInt64 : m < 0 -> Void
+0 Not_LT_MinInt64 : m < MinInt64 -> Void
+Not_LT_MinInt64 p = Not_LT_and_GTE p (GTE_MinInt64 m)
 
 ||| `m <= MaxInt64` for all `m` of type `Int64`.
 export
@@ -144,6 +145,7 @@ LTE_MaxInt64 m = case comp m MaxInt64 of
 ||| Not value of type `Int64` is greater than `MaxInt64`.
 export
 0 Not_GT_MaxInt64 : m > MaxInt64 -> Void
+Not_GT_MaxInt64 p = Not_LT_and_GTE p (LTE_MaxInt64 m)
 
 ||| Every value of type `Int64` is accessible with relation
 ||| to `(<)`.

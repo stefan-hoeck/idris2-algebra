@@ -130,7 +130,8 @@ GTE_MinInt32 m = case comp MinInt32 m of
 
 ||| Not value of type `Int32` is less than zero.
 export
-0 Not_LT_MinInt32 : m < 0 -> Void
+0 Not_LT_MinInt32 : m < MinInt32 -> Void
+Not_LT_MinInt32 p = Not_LT_and_GTE p (GTE_MinInt32 m)
 
 ||| `m <= MaxInt32` for all `m` of type `Int32`.
 export
@@ -144,6 +145,7 @@ LTE_MaxInt32 m = case comp m MaxInt32 of
 ||| Not value of type `Int32` is greater than `MaxInt32`.
 export
 0 Not_GT_MaxInt32 : m > MaxInt32 -> Void
+Not_GT_MaxInt32 p = Not_LT_and_GTE p (LTE_MaxInt32 m)
 
 ||| Every value of type `Int32` is accessible with relation
 ||| to `(<)`.

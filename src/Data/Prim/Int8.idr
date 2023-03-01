@@ -130,7 +130,8 @@ GTE_MinInt8 m = case comp MinInt8 m of
 
 ||| Not value of type `Int8` is less than zero.
 export
-0 Not_LT_MinInt8 : m < 0 -> Void
+0 Not_LT_MinInt8 : m < MinInt8 -> Void
+Not_LT_MinInt8 p = Not_LT_and_GTE p (GTE_MinInt8 m)
 
 ||| `m <= MaxInt8` for all `m` of type `Int8`.
 export
@@ -144,6 +145,7 @@ LTE_MaxInt8 m = case comp m MaxInt8 of
 ||| Not value of type `Int8` is greater than `MaxInt8`.
 export
 0 Not_GT_MaxInt8 : m > MaxInt8 -> Void
+Not_GT_MaxInt8 p = Not_LT_and_GTE p (LTE_MaxInt8 m)
 
 ||| Every value of type `Int8` is accessible with relation
 ||| to `(<)`.
