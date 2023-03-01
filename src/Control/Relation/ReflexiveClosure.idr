@@ -33,6 +33,20 @@ fromEq : {0 rel : _} -> (0 p : x === y) -> ReflexiveClosure rel x y
 fromEq Refl = Refl
 
 --------------------------------------------------------------------------------
+--          Transitivities
+--------------------------------------------------------------------------------
+
+public export
+0 strictLeft : Transitive a rel => rel x y -> ReflexiveClosure rel y z -> rel x z
+strictLeft w (Rel prf) = transitive w prf
+strictLeft w Refl      = w
+
+public export
+0 strictRight : Transitive a rel => ReflexiveClosure rel x y -> rel y z -> rel x z
+strictRight (Rel prf) w = transitive prf w
+strictRight Refl      w = w
+
+--------------------------------------------------------------------------------
 --          Transitive Chain
 --------------------------------------------------------------------------------
 
@@ -86,8 +100,6 @@ public export
   => (c : Chain rel x y)
   -> {auto p : IsStrict c}
   -> rel x y
-strict ((::) _ c @{Rel q}) {p = Here} = case weak c of
-  Rel z  => transitive q z
-  Refl   => q
+strict ((::) _ c @{Rel q}) {p = Here}    = strictLeft q $ weak c
 strict ((::) _ c @{Rel q}) {p = There _} = transitive q $ strict c
 strict ((::) _ c @{Refl})  {p = There _} = strict c
