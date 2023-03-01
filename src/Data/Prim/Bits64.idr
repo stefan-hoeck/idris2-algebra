@@ -131,6 +131,7 @@ GTE_MinBits64 m = case comp MinBits64 m of
 ||| Not value of type `Bits64` is less than zero.
 export
 0 Not_LT_MinBits64 : m < 0 -> Void
+Not_LT_MinBits64 p = Not_LT_and_GTE p (GTE_MinBits64 m)
 
 ||| `m <= MaxBits64` for all `m` of type `Bits64`.
 export
@@ -144,6 +145,7 @@ LTE_MaxBits64 m = case comp m MaxBits64 of
 ||| Not value of type `Bits64` is greater than `MaxBits64`.
 export
 0 Not_GT_MaxBits64 : m > MaxBits64 -> Void
+Not_GT_MaxBits64 p = Not_LT_and_GTE p (LTE_MaxBits64 m)
 
 ||| Every value of type `Bits64` is accessible with relation
 ||| to `(<)`.

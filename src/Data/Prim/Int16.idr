@@ -130,7 +130,8 @@ GTE_MinInt16 m = case comp MinInt16 m of
 
 ||| Not value of type `Int16` is less than zero.
 export
-0 Not_LT_MinInt16 : m < 0 -> Void
+0 Not_LT_MinInt16 : m < MinInt16 -> Void
+Not_LT_MinInt16 p = Not_LT_and_GTE p (GTE_MinInt16 m)
 
 ||| `m <= MaxInt16` for all `m` of type `Int16`.
 export
@@ -144,6 +145,7 @@ LTE_MaxInt16 m = case comp m MaxInt16 of
 ||| Not value of type `Int16` is greater than `MaxInt16`.
 export
 0 Not_GT_MaxInt16 : m > MaxInt16 -> Void
+Not_GT_MaxInt16 p = Not_LT_and_GTE p (LTE_MaxInt16 m)
 
 ||| Every value of type `Int16` is accessible with relation
 ||| to `(<)`.

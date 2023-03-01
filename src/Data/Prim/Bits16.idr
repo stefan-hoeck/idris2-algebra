@@ -131,6 +131,7 @@ GTE_MinBits16 m = case comp MinBits16 m of
 ||| Not value of type `Bits16` is less than zero.
 export
 0 Not_LT_MinBits16 : m < 0 -> Void
+Not_LT_MinBits16 p = Not_LT_and_GTE p (GTE_MinBits16 m)
 
 ||| `m <= MaxBits16` for all `m` of type `Bits16`.
 export
@@ -144,6 +145,7 @@ LTE_MaxBits16 m = case comp m MaxBits16 of
 ||| Not value of type `Bits16` is greater than `MaxBits16`.
 export
 0 Not_GT_MaxBits16 : m > MaxBits16 -> Void
+Not_GT_MaxBits16 p = Not_LT_and_GTE p (LTE_MaxBits16 m)
 
 ||| Every value of type `Bits16` is accessible with relation
 ||| to `(<)`.

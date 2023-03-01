@@ -39,3 +39,4 @@ modules = Algebra.Group
         , Data.Prim.Int32
         , Data.Prim.Int64
         , Data.Prim.Integer
+        , Data.Prim.String

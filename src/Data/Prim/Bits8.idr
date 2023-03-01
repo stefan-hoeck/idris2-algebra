@@ -131,6 +131,7 @@ GTE_MinBits8 m = case comp MinBits8 m of
 ||| Not value of type `Bits8` is less than zero.
 export
 0 Not_LT_MinBits8 : m < 0 -> Void
+Not_LT_MinBits8 p = Not_LT_and_GTE p (GTE_MinBits8 m)
 
 ||| `m <= MaxBits8` for all `m` of type `Bits8`.
 export
@@ -144,6 +145,7 @@ LTE_MaxBits8 m = case comp m MaxBits8 of
 ||| Not value of type `Bits8` is greater than `MaxBits8`.
 export
 0 Not_GT_MaxBits8 : m > MaxBits8 -> Void
+Not_GT_MaxBits8 p = Not_LT_and_GTE p (LTE_MaxBits8 m)
 
 ||| Every value of type `Bits8` is accessible with relation
 ||| to `(<)`.

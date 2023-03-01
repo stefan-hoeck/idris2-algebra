@@ -131,6 +131,7 @@ GTE_MinBits32 m = case comp MinBits32 m of
 ||| Not value of type `Bits32` is less than zero.
 export
 0 Not_LT_MinBits32 : m < 0 -> Void
+Not_LT_MinBits32 p = Not_LT_and_GTE p (GTE_MinBits32 m)
 
 ||| `m <= MaxBits32` for all `m` of type `Bits32`.
 export
@@ -144,6 +145,7 @@ LTE_MaxBits32 m = case comp m MaxBits32 of
 ||| Not value of type `Bits32` is greater than `MaxBits32`.
 export
 0 Not_GT_MaxBits32 : m > MaxBits32 -> Void
+Not_GT_MaxBits32 p = Not_LT_and_GTE p (LTE_MaxBits32 m)
 
 ||| Every value of type `Bits32` is accessible with relation
 ||| to `(<)`.
