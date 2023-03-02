@@ -26,7 +26,7 @@ Uninhabited (Lower lt m Nothing) where
   uninhabited (LJust _) impossible
 
 public export
-Strict a lt => Uninhabited (Lower lt (Just k) (Just k)) where
+Strict a eq lt => Uninhabited (Lower lt (Just k) (Just k)) where
   uninhabited LNothing impossible
   uninhabited (LJust refl) = void (irreflexive refl)
 
@@ -36,7 +36,7 @@ fromLT (LJust x) = x
 
 ||| Implementation and alias for `trichotomy`.
 export
-comp : Trichotomous a lt => (m1,m2 : Maybe a) -> Trichotomy (Lower lt) m1 m2
+comp : Trichotomous a (===) lt => (m1,m2 : Maybe a) -> Trichotomy (Lower lt) m1 m2
 comp (Just x) (Just y) = case trichotomy {rel = lt} x y of
   LT p c1 c2 => LT (LJust p) (\r => c1 (injective r)) (\x => c2 (fromLT x))
   EQ c1 p c2 => EQ (\x => c1 (fromLT x)) (cong Just p) (\x => c2 (fromLT x))
@@ -48,8 +48,10 @@ comp Nothing  Nothing  = EQ absurd Refl absurd
 ||| If `lt` is a total order of `a`, then `Lower lt` is a
 ||| total order of `Maybe a`.
 export %inline
-Trichotomous a lt => Trichotomous (Maybe a) (Lower lt) where
+Trichotomous a (===) lt => Trichotomous (Maybe a) (===) (Lower lt) where
   trichotomy = comp
+  eqLeft Refl lt = lt
+  eqRight lt Refl = lt
 
 export %inline
 Transitive a lt => Transitive (Maybe a) (Lower lt) where

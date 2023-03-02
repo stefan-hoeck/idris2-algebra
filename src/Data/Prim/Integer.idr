@@ -102,8 +102,10 @@ Transitive Integer (<) where
   transitive _ _ = LT unsafeRefl
 
 export %inline
-Trichotomous Integer (<) where
+Trichotomous Integer (===) (<) where
   trichotomy m n = comp m n
+  eqLeft Refl lt = lt
+  eqRight lt Refl = lt
 
 --------------------------------------------------------------------------------
 --          Axioms

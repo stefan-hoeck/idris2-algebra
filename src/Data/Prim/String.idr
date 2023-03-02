@@ -83,8 +83,10 @@ Transitive String (<) where
   transitive _ _ = LT unsafeRefl
 
 export %inline
-Trichotomous String (<) where
+Trichotomous String (===) (<) where
   trichotomy m n = comp m n
+  eqLeft Refl lt = lt
+  eqRight lt Refl = lt
 
 --------------------------------------------------------------------------------
 --          Bounds and Well-Foundedness

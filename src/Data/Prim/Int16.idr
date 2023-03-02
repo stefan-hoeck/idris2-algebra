@@ -103,8 +103,10 @@ Transitive Int16 (<) where
   transitive _ _ = LT unsafeRefl
 
 export %inline
-Trichotomous Int16 (<) where
+Trichotomous Int16 (===) (<) where
   trichotomy m n = comp m n
+  eqLeft Refl lt = lt
+  eqRight lt Refl = lt
 
 --------------------------------------------------------------------------------
 --          Bounds and Well-Foundedness

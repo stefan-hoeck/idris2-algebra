@@ -11,7 +11,7 @@ public export
 record OrderedRing (a : Type) (lt : a -> a -> Type) (z,o : a) (p,m,sub : Op2 a) where
   constructor MkOR
   ring   : Ring a z o p m sub
-  strict : Strict a lt
+  strict : Strict a (===) lt
   add    : {u,v,w : a} -> lt u v -> lt (p u w) (p v w)
   mult   : {u,v,w : a} -> lt u v -> lt z w -> lt (m u w) (m v w)
 

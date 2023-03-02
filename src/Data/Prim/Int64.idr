@@ -103,8 +103,10 @@ Transitive Int64 (<) where
   transitive _ _ = LT unsafeRefl
 
 export %inline
-Trichotomous Int64 (<) where
+Trichotomous Int64 (===) (<) where
   trichotomy m n = comp m n
+  eqLeft Refl lt = lt
+  eqRight lt Refl = lt
 
 --------------------------------------------------------------------------------
 --          Bounds and Well-Foundedness

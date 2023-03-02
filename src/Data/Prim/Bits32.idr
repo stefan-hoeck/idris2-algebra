@@ -103,8 +103,10 @@ Transitive Bits32 (<) where
   transitive _ _ = LT unsafeRefl
 
 export %inline
-Trichotomous Bits32 (<) where
+Trichotomous Bits32 (===) (<) where
   trichotomy m n = comp m n
+  eqLeft Refl lt = lt
+  eqRight lt Refl = lt
 
 --------------------------------------------------------------------------------
 --          Bounds and Well-Foundedness

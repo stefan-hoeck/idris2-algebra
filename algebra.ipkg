@@ -27,6 +27,8 @@ modules = Algebra.Group
 
         , Data.Maybe.Lower
         , Data.Maybe.Upper
+        , Data.Pair.First
+        , Data.Pair.Second
         , Data.Maybe0
         , Data.Either0
         , Data.Pair0
