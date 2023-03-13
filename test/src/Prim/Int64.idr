@@ -1,0 +1,29 @@
+module Prim.Int64
+
+import Data.Prim.Int64
+import Data.SOP
+import Hedgehog
+import Prim.RingLaws
+
+prop_ltMax : Property
+prop_ltMax = property $ do
+  b8 <- forAll anyInt64
+  (b8 <= MaxInt64) === True
+
+prop_ltMin : Property
+prop_ltMin = property $ do
+  b8 <- forAll anyInt64
+  (b8 >= MinInt64) === True
+
+prop_comp : Property
+prop_comp = property $ do
+  [m,n] <- forAll $ np [anyInt64, anyInt64]
+  toOrdering (comp m n) === compare m n
+
+export
+props : Group
+props = MkGroup "Int64" $
+  [ ("prop_ltMax",  prop_ltMax)
+  , ("prop_ltMin",  prop_ltMin)
+  , ("prop_comp",   prop_comp)
+  ] ++ ringProps ring_int64 anyInt64
