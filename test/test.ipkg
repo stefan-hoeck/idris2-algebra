@@ -8,6 +8,7 @@ license    = "BSD-3 Clause"
 
 sourcedir  = "src"
 depends    = algebra
+           , hedgehog
 
 main = Main
 executable = algebra-test
