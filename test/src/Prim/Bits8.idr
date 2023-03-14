@@ -43,6 +43,16 @@ prop_divMod = property $ do
       r = n `mod` d
   n === x * d + r
 
+prop_lt : Property
+prop_lt = property $ do
+  [m,n] <- forAll $ np [anyBits8, anyBits8]
+  isJust (lt m n) === (m < n)
+
+prop_lte : Property
+prop_lte = property $ do
+  [m,n] <- forAll $ np [anyBits8, anyBits8]
+  isJust (lte m n) === (m <= n)
+
 export
 props : Group
 props = MkGroup "Bits8" $
@@ -52,4 +62,6 @@ props = MkGroup "Bits8" $
   , ("prop_mod",    prop_mod)
   , ("prop_div",    prop_div)
   , ("prop_divMod", prop_divMod)
+  , ("prop_lt",     prop_lt)
+  , ("prop_lte",    prop_lte)
   ] ++ ringProps ring_bits8 anyBits8
