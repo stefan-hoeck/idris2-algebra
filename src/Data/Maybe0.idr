@@ -10,6 +10,11 @@ data Maybe0 : Type -> Type where
   Just0    : (0 v : a) -> Maybe0 a
 
 public export
+isJust : Maybe0 a -> Bool
+isJust Nothing0  = False
+isJust (Just0 v) = True
+
+public export
 map : (0 f : a -> b) -> Maybe0 a -> Maybe0 b
 map f Nothing0  = Nothing0
 map f (Just0 v) = Just0 (f v)

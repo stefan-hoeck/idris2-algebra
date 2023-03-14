@@ -4,6 +4,7 @@ import public Control.Order
 import public Control.Relation
 import public Control.Relation.ReflexiveClosure
 import public Control.Relation.Trichotomy
+import public Data.Maybe0
 
 %default total
 
@@ -65,6 +66,18 @@ ltNotGT x = strictLT x $ assert_total (idris_crash "IMPOSSIBLE: LT and GT")
 
 0 eqNotLT : m === n -> Not (m < n)
 eqNotLT = flip ltNotEQ
+
+public export %inline
+lt : (x,y : String) -> Maybe0 (x < y)
+lt x y = case prim__lt_String x y of
+  0 => Nothing0
+  _ => Just0 (mkLT unsafeRefl)
+
+public export %inline
+lte : (x,y : String) -> Maybe0 (x <= y)
+lte x y = case prim__lte_String x y of
+  0 => Nothing0
+  _ => Just0 (if x < y then (Rel $ mkLT unsafeRefl) else (fromEq unsafeRefl))
 
 export
 comp : (m,n : String) -> Trichotomy (<) m n
