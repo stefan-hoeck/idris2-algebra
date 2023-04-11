@@ -34,6 +34,7 @@ modules = Algebra.Group
         , Data.Prim.Bits16
         , Data.Prim.Bits32
         , Data.Prim.Bits64
+        , Data.Prim.Char
         , Data.Prim.Int8
         , Data.Prim.Int16
         , Data.Prim.Int32

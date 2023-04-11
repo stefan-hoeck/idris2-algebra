@@ -5,6 +5,7 @@ import Prim.Bits8
 import Prim.Bits16
 import Prim.Bits32
 import Prim.Bits64
+import Prim.Char
 import Prim.Int8
 import Prim.Int16
 import Prim.Int32
@@ -21,6 +22,7 @@ main = test
   , Bits16.props
   , Bits32.props
   , Bits64.props
+  , Char.props
   , Int8.props
   , Int16.props
   , Int32.props
