@@ -86,6 +86,7 @@ parameters {0 a : Type}
   epr = eprod m o
 
   -- Adding two sums via `add` preserves the evaluation result.
+  -- Note: `assert_total` in here is a temporary fix for idris issue #2954
   export
   0 padd : (x, y : Sum a as) -> esum x + esum y === esum (add x y)
   padd []            xs = r.plus.leftNeutral
@@ -96,13 +97,13 @@ parameters {0 a : Type}
       ~~ (f * epr x) + (esum xs + (g * epr y + esum ys))
         ..< r.plus.associative
       ~~ f * epr x + esum (add xs (T g y :: ys))
-        ... cong (f * epr x +) (padd xs (T g y :: ys))
+        ... cong (f * epr x +) (assert_total $ padd xs (T g y :: ys))
     _ | GT = Calc $
       |~ (f * epr x + esum xs) + (g * epr y + esum ys)
       ~~ g * epr y + ((f * epr x + esum xs) + esum ys)
          ..< lemma213 r.plus.csgrp
       ~~ g * epr y + esum (add (T f x :: xs) ys)
-         ... cong (g * epr y  +) (padd (T f x :: xs) ys)
+         ... cong (g * epr y  +) (assert_total $ padd (T f x :: xs) ys)
     _ | EQ = case pcompProd x y eq of
          Refl => Calc $
            |~ (f * epr x + esum xs) + (g * epr x + esum ys)
