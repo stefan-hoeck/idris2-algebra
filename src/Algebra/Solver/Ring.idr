@@ -49,91 +49,100 @@ var x = Var x %search
 ||| Addition of variables. This is an alias for
 ||| `var x + var y`.
 public export
-(.+.) :  {0 as : List a}
-      -> (x,y : a)
-      -> Elem x as
-      => Elem y as
-      => Expr a as
+(.+.) :
+     {0 as : List a}
+  -> (x,y : a)
+  -> {auto _ : Elem x as}
+  -> {auto _ : Elem y as}
+  -> Expr a as
 (.+.) x y =var x + var y
 
 ||| Addition of variables. This is an alias for
 ||| `x + var y`.
 public export
-(+.) :  {0 as : List a}
-     -> (x : Expr a as)
-     -> (y : a)
-     -> Elem y as
-     => Expr a as
+(+.) :
+     {0 as : List a}
+  -> (x : Expr a as)
+  -> (y : a)
+  -> {auto _ : Elem y as}
+  -> Expr a as
 (+.) x y = x + var y
 
 ||| Addition of variables. This is an alias for
 ||| `var x + y`.
 public export
-(.+) :  {0 as : List a}
-     -> (x : a)
-     -> (y : Expr a as)
-     -> Elem x as
-     => Expr a as
+(.+) :
+     {0 as : List a}
+  -> (x : a)
+  -> (y : Expr a as)
+  -> {auto _ : Elem x as}
+  -> Expr a as
 (.+) x y = var x + y
 
 ||| Addition of variables. This is an alias for
 ||| `var x + var y`.
 public export
-(.-.) :  {0 as : List a}
-      -> (x,y : a)
-      -> Elem x as
-      => Elem y as
-      => Expr a as
+(.-.) :
+     {0 as : List a}
+  -> (x,y : a)
+  -> {auto _ : Elem x as}
+  -> {auto _ : Elem y as}
+  -> Expr a as
 (.-.) x y =var x - var y
 
 ||| Addition of variables. This is an alias for
 ||| `x + var y`.
 public export
-(-.) :  {0 as : List a}
-     -> (x : Expr a as)
-     -> (y : a)
-     -> Elem y as
-     => Expr a as
+(-.) :
+     {0 as : List a}
+  -> (x : Expr a as)
+  -> (y : a)
+  -> {auto _ : Elem y as}
+  -> Expr a as
 (-.) x y = x - var y
 
 ||| Addition of variables. This is an alias for
 ||| `var x + y`.
 public export
-(.-) :  {0 as : List a}
-     -> (x : a)
-     -> (y : Expr a as)
-     -> Elem x as
-     => Expr a as
+(.-) :
+     {0 as : List a}
+  -> (x : a)
+  -> (y : Expr a as)
+  -> {auto _ : Elem x as}
+  -> Expr a as
 (.-) x y = var x - y
 
 ||| Multiplication of variables. This is an alias for
 ||| `var x * var y`.
 public export
-(.*.) :  {0 as : List a}
-      -> (x,y : a)
-      -> Elem x as
-      => Elem y as
-      => Expr a as
+(.*.) :
+     {0 as : List a}
+  -> (x,y : a)
+  -> {auto _ : Elem x as}
+  -> {auto _ : Elem y as}
+  -> Expr a as
 (.*.) x y = var x * var y
 
 ||| Multiplication of variables. This is an alias for
 ||| `var x * y`.
 public export
-(*.) :  {0 as : List a}
-     -> (x : Expr a as)
-     -> (y : a)
-     -> Elem y as
-     => Expr a as
+(*.) :
+     {0 as : List a}
+  -> (x : Expr a as)
+  -> (y : a)
+  -> {auto _ : Elem y as}
+  -> Expr a as
 (*.) x y = x * var y
 
 ||| Multiplication of variables. This is an alias for
 ||| `x * var y`.
 public export
-(.*) :  {0 as : List a}
-     -> (x : a)
-     -> (y : Expr a as)
-     -> Elem x as
-     => Expr a as
+(.*) :
+     {0 as : List a}
+  -> (x : a)
+  -> (y : Expr a as)
+  -> {auto _ : Elem x as}
+  -> Expr a as
 (.*) x y = var x * y
 
 --------------------------------------------------------------------------------
@@ -286,8 +295,8 @@ namespace Eval
     export
     0 solve :
          (e1,e2 : Expr a as)
-      -> (prf : normalize e1 === normalize e2)
-      => eval e1 === eval e2
+      -> {auto prf : normalize e1 === normalize e2}
+      -> eval e1 === eval e2
     solve e1 e2 @{prf} = Calc $
       |~ eval e1
       ~~ esum r.rig isZ (normalize e1) ...(pnormalize e1)

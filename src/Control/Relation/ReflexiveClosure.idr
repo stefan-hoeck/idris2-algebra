@@ -96,8 +96,8 @@ weak ((::) _ c @{p}) = transitive p $ weak c
 ||| strict, the `rel x y` holds.
 public export
 0 strict :
-     Transitive a rel
-  => (c : Chain rel x y)
+     {auto _ : Transitive a rel}
+  -> (c : Chain rel x y)
   -> {auto p : IsStrict c}
   -> rel x y
 strict ((::) _ c @{Rel q}) {p = Here}    = strictLeft q $ weak c
