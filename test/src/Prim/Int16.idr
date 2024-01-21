@@ -1,5 +1,8 @@
 module Prim.Int16
 
+import Algebra.Ring
+import Control.Relation.Trichotomy
+import Data.Maybe0
 import Data.Prim.Int16
 import Data.SOP
 import Hedgehog

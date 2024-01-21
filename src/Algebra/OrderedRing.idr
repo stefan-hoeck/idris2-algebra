@@ -1,6 +1,7 @@
 module Algebra.OrderedRing
 
 import Algebra.Solver.Ring
+import Control.Relation
 import Control.Relation.ReflexiveClosure
 import Control.Relation.Trichotomy
 import Syntax.PreorderReasoning.Generic

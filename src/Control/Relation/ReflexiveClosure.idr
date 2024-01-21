@@ -2,8 +2,8 @@
 ||| a transitive relation.
 module Control.Relation.ReflexiveClosure
 
-import public Control.Order
-import public Control.Relation
+import Control.Order
+import Control.Relation
 
 %default total
 
