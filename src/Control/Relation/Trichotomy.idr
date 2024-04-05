@@ -1,6 +1,5 @@
 module Control.Relation.Trichotomy
 
-import Control.Relation
 import Control.Relation.ReflexiveClosure
 import Data.Either0
 

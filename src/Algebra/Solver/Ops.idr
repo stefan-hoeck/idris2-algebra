@@ -2,7 +2,7 @@ module Algebra.Solver.Ops
 
 import public Data.List.Elem
 
-export infixl 8 .+>, <+., .+.
+infixl 8 .+>, <+., .+.
 
 ||| Checks if elements `x` and `y` are at the same position in list
 ||| `xs` and thus identical.

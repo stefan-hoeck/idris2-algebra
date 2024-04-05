@@ -12,9 +12,9 @@ import Syntax.PreorderReasoning
 --          "Operators"
 --------------------------------------------------------------------------------
 
-export infixl 8 `p`,`sub`
+infixl 8 `p`,`sub`
 
-export infixl 9 `m`
+infixl 9 `m`
 
 --------------------------------------------------------------------------------
 --          Laws

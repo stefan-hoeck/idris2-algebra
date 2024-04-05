@@ -1,7 +1,5 @@
 module Prim.String
 
-import Control.Relation.Trichotomy
-import Data.Maybe0
 import Data.Prim.String
 import Data.SOP
 import Hedgehog

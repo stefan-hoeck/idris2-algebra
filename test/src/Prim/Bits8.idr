@@ -1,8 +1,5 @@
 module Prim.Bits8
 
-import Algebra.Ring
-import Control.Relation.Trichotomy
-import Data.Maybe0
 import Data.Prim.Bits8
 import Data.SOP
 import Hedgehog
