@@ -1,12 +1,11 @@
 module Data.Prim.Bits8
 
-import public Algebra.Ring
-import public Control.Order
-import public Control.Relation
-import public Control.Relation.ReflexiveClosure
-import public Control.Relation.Trichotomy
-import public Control.WellFounded
-import public Data.Maybe0
+import Algebra.Ring
+import Control.Relation
+import Control.Relation.ReflexiveClosure
+import Control.Relation.Trichotomy
+import Control.WellFounded
+import Data.Maybe0
 
 %default total
 
