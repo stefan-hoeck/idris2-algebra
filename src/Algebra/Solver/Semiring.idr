@@ -82,9 +82,9 @@ public export
 var : {0 as : List a} -> (x : a) -> Elem x as => Expr a as
 var x = Var x %search
 
-infixl 8 .+., .+, +.
+export infixl 8 .+., .+, +.
 
-infixl 9 .*., .*, *.
+export infixl 9 .*., .*, *.
 
 ||| Addition of variables. This is an alias for
 ||| `var x + var y`.
