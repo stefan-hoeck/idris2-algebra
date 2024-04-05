@@ -1,10 +1,10 @@
 module Data.Prim.String
 
-import Control.Order
-import Control.Relation
-import Control.Relation.ReflexiveClosure
-import Control.Relation.Trichotomy
-import Data.Maybe0
+import public Control.Order
+import public Control.Relation
+import public Control.Relation.ReflexiveClosure
+import public Control.Relation.Trichotomy
+import public Data.Maybe0
 
 %default total
 
