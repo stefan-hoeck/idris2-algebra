@@ -225,8 +225,8 @@ export
 0 pcompNat : (x,y : Nat) -> (compare x y === EQ) -> x === y
 pcompNat 0 0         prf = Refl
 pcompNat (S k) (S j) prf = cong S $ pcompNat k j prf
-pcompNat 0 (S k) Refl impossible
-pcompNat (S k) 0 Refl impossible
+pcompNat Z (S k) Refl impossible
+pcompNat (S k) Z Refl impossible
 
 export
 0 pcompProd :
