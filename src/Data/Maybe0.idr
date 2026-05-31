@@ -41,3 +41,13 @@ public export
 zipWith3 : (0 f : a -> b -> c -> d) -> Maybe0 a -> Maybe0 b -> Maybe0 c -> Maybe0 d
 zipWith3 f (Just0 x) (Just0 y) (Just0 z) = Just0 $ f x y z
 zipWith3 f _         _         _         = Nothing0
+
+public export
+maybeCong : (f : a -> b) -> Maybe0 (x = y) -> Maybe0 (f x = f y)
+maybeCong f Nothing0  = Nothing0
+maybeCong f (Just0 p) = Just0 $ cong f p
+
+public export
+maybeCong2 : (f : a -> b -> c) -> Maybe0 (x = y) -> Maybe0 (v = w) -> Maybe0 (f x v = f y w)
+maybeCong2 f (Just0 p) (Just0 q) = Just0 $ cong2 f p q
+maybeCong2 f _         _         = Nothing0
