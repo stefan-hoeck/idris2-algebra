@@ -1,5 +1,6 @@
 module Data.Prim.Bits32
 
+import Data.Fin
 import public Algebra.Ring
 import public Control.Order
 import public Control.Relation
@@ -169,3 +170,31 @@ namespace WellFounded
   export %inline
   [GT] WellFounded Bits32 (>) where
     wellFounded = accessGT
+
+--------------------------------------------------------------------------------
+--          Conversions
+--------------------------------------------------------------------------------
+
+export
+0 ltImpliesNatLT : (x,y : Bits32) -> x < y => Nat.lt (cast x) (cast y) === True
+ltImpliesNatLT x y = unsafeRefl
+
+export
+0 lteImpliesNatLT : (x,y : Bits32) -> x <= y => Nat.lt (cast x) (S $ cast y) === True
+lteImpliesNatLT x y = unsafeRefl
+
+export
+0 gtImpliesNatGT : (x,y : Bits32) -> x > y => Nat.gt (cast x) (cast y) === True
+gtImpliesNatGT x y = ltImpliesNatLT y x
+
+export %inline
+bits32ToFin : (x : Bits32) -> (0 y : Bits32) -> (0 lt : x < y) => Fin (cast y)
+bits32ToFin x y = natToFinLT (cast x) @{ltReflectsLT _ _ $ ltImpliesNatLT x y}
+
+export %inline
+bits32ToFinLTE : (x : Bits32) -> (0 y : Bits32) -> (0 lte : x <= y) => Fin (S $ cast y)
+bits32ToFinLTE x y = natToFinLT (cast x) @{ltReflectsLT _ _ $ lteImpliesNatLT x y}
+
+export %inline
+Cast Bits32 (Fin 0x1_0000_0000) where
+  cast x = bits32ToFinLTE x 0xffff_ffff @{LTE_MaxBits32 x}
