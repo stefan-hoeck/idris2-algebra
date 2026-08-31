@@ -286,11 +286,17 @@ namespace Eval
     ||| our code. For instance:
     |||
     ||| ```idris example
+    ||| isNeutral : (v : Bits8) -> Maybe (v === 0)
+    ||| isNeutral 0 = Just Refl
+    ||| isNeutral _ = Nothing
+    |||
+    ||| %ambiguity_depth 4
     ||| 0 binom1 : {x,y : Bits8}
     |||          -> (x + y) * (x + y) === x * x + 2 * x * y + y * y
-    ||| binom1 = solve [x,y]
+    ||| binom1 = solve {as = [x,y]}
+    |||                isNeutral
     |||                ((x .+. y) * (x .+. y))
-    |||                (x .*. x + 2 *. x *. y + y .*. y)
+    |||                (x .*. x + Lit 2 *. x *. y + y .*. y)
     ||| ```
     export
     0 solve :
